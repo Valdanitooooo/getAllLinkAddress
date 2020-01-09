@@ -24,7 +24,8 @@ console.log(urls)
 ```
 
 这个页面中所有的请求就打印出来了
-7. 接下来需要把这些url复制到[Parallel Controller & Sampler](https://github.com/Blazemeter/jmeter-bzm-plugins/blob/master/parallel/Parallel.md)插件里，但是这个插件又不支持复制多个，所以我们打开jmeter的脚本文件，发现之前配置的url都是这样格式的
+
+7. 接下来需要把这些url复制到[Parallel Controller & Sampler](https://github.com/Blazemeter/jmeter-bzm-plugins/blob/master/parallel/Parallel.md)插件里, 但是这个插件又不支持复制多个, 所以我们打开jmeter的脚本文件, 发现之前配置的url都是这样格式的
 
 ```xml
 <collectionProp name="urls">
@@ -35,7 +36,7 @@ console.log(urls)
 </collectionProp>
 ```
 
-为了方便复制到jmeter脚本中，我们再优化一下我们的输出格式, 这个`collectionProp`和`stringProp`的`name`属性也不知道有啥用，随便填个进去吧
+为了方便复制到jmeter脚本中, 我们再优化一下我们的输出格式, 这个`collectionProp`和`stringProp`的`name`属性也不知道有啥用, 随便填个进去吧
 
 ```javascript
 var urls = ''
@@ -45,8 +46,9 @@ reqs.log.entries.forEach(item => {
 console.log(urls)
 ```
 
-将输出结果复制到jmeter脚本中的`<collectionProp name="urls">`标签最中, 保存，在jmeter中导入脚本，然后，报错了。。。
-8. 大概看一下报错信息，应该是格式问题，对比一下之前配置的url，看到`&`被转译了，再改一下脚本
+将输出结果复制到jmeter脚本中的`<collectionProp name="urls">`标签中, 保存, 在jmeter中导入脚本, 然后, 报错了。。。
+
+8. 大概看一下报错信息, 应该是格式问题, 对比一下之前配置的url, 看到`&`被转译了, 再改一下脚本
 
 ```javascript
 var urls = ''
@@ -56,4 +58,4 @@ reqs.log.entries.forEach(item => {
 console.log(urls)
 ```
 
-这次可以了，最终脚本就是这样了
+这次可以了, 最终脚本就是这样了
