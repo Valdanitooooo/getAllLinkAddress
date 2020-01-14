@@ -59,3 +59,30 @@ console.log(urls)
 ```
 
 这次可以了, 最终脚本就是这样了
+
+9. 翻车了, har文件太大, 靠浏览器处理不了, 增加一个java版本, 用读写文件的方式, 并使用了jsonpath, 逻辑还是一样。
+
+```java
+    public static void main(String[] args) {
+        try {
+            FileInputStream fis = new FileInputStream("your har json file path ");
+            final String str = IOUtils.toString(fis, "UTF-8");
+            List<String> flows = JsonPath.parse(str).read("$.log.entries[*].request.url");
+            String urls = "";
+            for (String flow : flows) {
+                flow = flow.replaceAll("&", "&amp;");
+                urls += "<collectionProp name=\"1357392467\">\n   <stringProp name=\"726316312\">"
+                        + flow + "</stringProp>\n</collectionProp>\n";
+            }
+            File file = new File("your output path/urls.xml");
+            FileOutputStream outputStream = new FileOutputStream(file);
+            InputStream is = new ByteArrayInputStream(
+                    urls.getBytes("utf8"));
+            IOUtils.copy(is, outputStream);
+            System.out.println("success");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+```
+
